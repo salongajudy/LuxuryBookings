@@ -1,0 +1,121 @@
+﻿@model List<BookingPlatform.Models.Rooms>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- banner -->
+<div class="banner">
+    <img src="~/Content/images/photos/banner.jpg" class="img-responsive" alt="slide">
+    <div class="welcome-message">
+        <div class="wrap-info">
+            <div class="information">
+                <h1 class="animated fadeInDown">Best hotels in Philippines</h1>
+                <p class="animated fadeInUp">Most luxurious properties of asia with the royal treatments and excellent customer service.</p>
+            </div>
+            <a href="#footer" class="arrow-nav scroll wowload fadeInDownBig"><i class="fa fa-angle-down"></i></a>
+        </div>
+    </div>
+</div>
+<!-- banner-->
+<!-- Rooms -->
+<div class="spacer services wowload fadeInUp">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Room Cards-->
+                <div class="caption">Rooms</div>
+                <div class="card-deck">
+                    @{int i = 8; }
+                    @foreach (var room in Model)
+                    {
+                        string strPicPath = "~/Content/images/photos/" + @i.ToString() + ".jpg";
+                        <div class="col-sm-4 card">
+                            <img src="@Url.Content(strPicPath.ToString())" class="card-img-top" alt="@room.Title" style="width:100%">
+                            <div class="card-body margin-top">
+                                <h4 class="card-title">@room.Title</h4>
+                                <h5 class="card-text">@room.Address</h5>
+                                <p class="card-text">@room.Description</p>
+                                <p class="card-text">CAPACITY: @room.Capacity pax</p>
+                                <p class="card-text">PRICE: Php @Convert.ToDecimal(room.Price).ToString("#,##0.00")</p>
+                                <a href="javascript:LoadModal('@room.Id')" class="btn btn-warning stretched-link">Book Now</a>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Rooms -->
+<!-- Booking Modal -->
+<div id="BookingModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Book a Room</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button id="btnBook" type="button" class="btn btn-default" onclick="saveBooking()">Book</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Booking Modal -->
+@section Scripts{
+   <script>
+    function LoadModal(roomId) {
+        var url = "@Url.Action("LoadPartial","Home")";
+        $.ajax({
+            type: 'GET',
+            url: url,
+            cache: false,
+            data: { "roomId" : roomId },   
+            success:function(result)
+            {
+                $('#BookingModal').find("div.row").html(result); 
+                $('#BookingModal').find("#btnBook").show();
+                $("[name='DateFrom']").datepicker();
+                $("[name='DateTo']").datepicker();
+                $('#BookingModal').modal('show');  
+            }
+         });      
+           }
+    function saveBooking() {
+        var frm = $('#frmBooking').serialize();
+        var url = "@Url.Action("SaveBooking","Home")";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            cache: false,
+            data : frm,   
+            success:function(result)
+            {
+                if (result.isError == true) {
+                    $("#msg-user").addClass("alert-warning");
+                    $("#msg-user").find("p").html(result.msg.replace("&lt;br /&gt;", "<br \>"));
+                    $("#msg-user").show();
+                }
+                else {
+                    $('#BookingModal').find("#btnBook").hide();
+                    $('#BookingModal').find("div.row").html(result.msg); 
+                }
+                 
+            }
+        });
+        return false;
+    }
+   
+    </script> 
+}

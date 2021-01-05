@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Bookings</title>
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800|Old+Standard+TT' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800' rel='stylesheet' type='text/css'>
+
+    <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/images")
+    @Styles.Render("~/Content/customCss")
+
+</head>
+<body id="home">
+    <!-- header -->
+    <nav class="navbar  navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")"><img src="~/Content/images/logo.png" alt="Luxury Bookings"></a>
+            </div>
+
+           
+        </div><!-- container-fluid -->
+    </nav>
+    <!-- header -->
+        @RenderBody()
+        <hr />
+        <footer class="spacer">
+            <div class="container" id="footer">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h4>Luxury Bookings</h4>
+                        <p>Luxury Bookings was lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce molestie tellus sit amet faucibus cursus. Morbi lorem ipsum, blandit viverra dapibus eget, lobortis vel nunc. Cras laoreet et felis at porttitor. Sed finibus egestas sem, sit amet rhoncus nisi. Vivamus odio magna, finibus non orci non, tempor dignissim elit. Vivamus nunc lacus, aliquam ac odio ut, aliquet cursus felis. Etiam congue suscipit elit et mattis. Donec in odio tempus, consequat lorem a, ornare nisi. Duis venenatis lorem dui, nec tincidunt velit rhoncus a. Donec est purus, dignissim a efficitur a, vulputate in ante. Quisque dignissim nisi sed nisi placerat ullamcorper. Maecenas elementum nisi quis neque lobortis, non molestie augue feugiat.  </p>
+                    </div>
+
+                    <div class="col-sm-5 subscribe">
+                        <h4>Subscription</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter email id here">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Get Notify</button>
+                            </span>
+                        </div>
+                        <div class="social">
+                            <a href="#"><i class="fa fa-facebook-square" data-toggle="tooltip" data-placement="top" data-original-title="facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram" data-toggle="tooltip" data-placement="top" data-original-title="instragram"></i></a>
+                            <a href="#"><i class="fa fa-twitter-square" data-toggle="tooltip" data-placement="top" data-original-title="twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-square" data-toggle="tooltip" data-placement="top" data-original-title="pinterest"></i></a>
+                            <a href="#"><i class="fa fa-tumblr-square" data-toggle="tooltip" data-placement="top" data-original-title="tumblr"></i></a>
+                            <a href="#"><i class="fa fa-youtube-square" data-toggle="tooltip" data-placement="top" data-original-title="youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.container-->
+            <!--/.footer-bottom-->
+        </footer>
+
+    <a href="#home" class="toTop scroll"><i class="fa fa-angle-up"></i></a>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
